@@ -11,10 +11,10 @@ export default function NewsletterSection() {
   const id = Math.random().toString(16).substring(2);
 
   return (
-    <div>
-      <div className="px-3">
-        <h2 className="mb-7 text-3xl font-semibold">Stay up to date</h2>
-        <p className="mb-5">
+    <div className="md:mx-auto md:flex md:max-w-6xl">
+      <div className="mx-auto max-w-6xl px-3 md:border-r-2 md:pr-8">
+        <h2 className="mb-3 text-3xl font-semibold">Stay up to date</h2>
+        <p className="mb-6">
           Get the latest updates and feature releases delivered straight to your
           inbox.
         </p>
@@ -29,9 +29,9 @@ export default function NewsletterSection() {
           <BaseButton type="secondary">Subscribe</BaseButton>
         </div>
       </div>
-      <div className="my-4 h-[2px] bg-white"></div>
-      <div className="px-3">
-        <h2 className="mb-7 text-3xl font-semibold">Join the community</h2>
+      <div className="my-4 h-[2px] bg-white md:hidden"></div>
+      <div className="mx-auto max-w-6xl px-3 md:pl-8">
+        <h2 className="mb-3 text-3xl font-semibold">Join the community</h2>
         <p className="mb-7">
           Engage with our community, ask questions and suggest features.
         </p>

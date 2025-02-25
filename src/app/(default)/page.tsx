@@ -7,7 +7,6 @@ import ExpandableContainers from "@/src/components/informationDisplay/Expandable
 import CheckMarkText from "@/src/components/informationDisplay/CheckMarkText";
 import GitHubIcon from "@/public/icons/github.svg";
 import NewsletterSection from "@/src/components/sections/NewsletterSection";
-import Image from "next/image";
 import SideSection from "@/src/components/informationDisplay/SideSection";
 
 export default function Home() {
@@ -18,7 +17,7 @@ export default function Home() {
 
   return (
     <div>
-      <section style={style} className="px-3 py-[72px]">
+      <section style={style} className="px-3 py-[112px]">
         <h1 className="mt-16 text-center text-4xl font-semibold">
           Automate your Documentation
         </h1>
@@ -32,7 +31,7 @@ export default function Home() {
           </BaseLink>
         </div>
       </section>
-      <section className="mb-10 px-3">
+      <section className="mx-auto mb-10 max-w-6xl px-3">
         <ExpandableContainers
           containers={[
             {
@@ -68,7 +67,7 @@ export default function Home() {
           ]}
         />
       </section>
-      <section className="relative overflow-hidden px-3 pb-10">
+      <section className="relative mx-auto max-w-6xl overflow-hidden px-3 pb-10 md:overflow-auto">
         <h2 className="mb-7 text-3xl font-semibold">
           Open source is transparency
         </h2>
@@ -84,7 +83,7 @@ export default function Home() {
         <BaseLink href="https://github.com/zendoc-io" newTab type="secondary">
           Zendoc on GitHub
         </BaseLink>
-        <div className="absolute -bottom-4 -right-20 -z-10 text-[#F1F1F1]">
+        <div className="absolute -bottom-4 -right-20 -z-10 text-[#F1F1F1] md:-top-0 md:right-0">
           <GitHubIcon height={230} />
         </div>
       </section>
@@ -92,8 +91,8 @@ export default function Home() {
         <NewsletterSection />
       </section>
       <section className="bg-black px-3 py-7 text-center text-white">
-        <h2 className="mb-7 text-3xl font-semibold">How Zendoc works</h2>
-        <div className="grid gap-32">
+        <h2 className="mb-14 text-3xl font-semibold">How Zendoc works</h2>
+        <div className="mx-auto grid max-w-6xl gap-32">
           <SideSection
             title="Zendoc Agents"
             image={{
@@ -117,6 +116,7 @@ export default function Home() {
               width: 1320,
               height: 1574,
             }}
+            direction="right"
           >
             <p>
               The Zendoc Documentation Engine will automatically detect and
@@ -139,9 +139,9 @@ export default function Home() {
           </SideSection>
         </div>
       </section>
-      <section className="px-3 py-7">
+      <section className="mx-auto max-w-6xl px-3 py-7">
         <h2 className="mb-7 text-3xl font-semibold">Ready to try Zendoc?</h2>
-        <p className="mb-7">
+        <p className="mb-7 max-w-xl">
           Enjoy our live demo (when available), or for those who are further
           interested, simply visit our repository and interact with us directly.
         </p>

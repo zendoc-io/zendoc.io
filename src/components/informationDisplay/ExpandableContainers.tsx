@@ -24,7 +24,7 @@ export default function ExpandableContainers({ containers }: Props) {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="flex flex-col gap-4 lg:flex-row">
       {containers.map((container, index) => (
         <ExpandableContainer
           key={index}
