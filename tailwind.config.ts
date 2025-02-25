@@ -7,22 +7,22 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontSize: {
-      "4xl": [
-        "2.5rem",
-        {
-          lineHeight: "2.8rem",
-          letterSpacing: "-0.05rem",
-        },
-      ],
-      "3xl": ["2rem", { lineHeight: "2.4rem", letterSpacing: "-0.024rem" }],
-      "2xl": [
-        "1.5rem",
-        { lineHeight: "1.725rem", letterSpacing: "−0.0075rem" },
-      ],
-      base: ["1rem", { lineHeight: "1.3rem", letterSpacing: "0.012rem" }],
-    },
     extend: {
+      fontSize: {
+        "4xl": [
+          "2.5rem",
+          {
+            lineHeight: "2.8rem",
+            letterSpacing: "-0.05rem",
+          },
+        ],
+        "3xl": ["2rem", { lineHeight: "2.4rem", letterSpacing: "-0.027rem" }],
+        "2xl": [
+          "1.5rem",
+          { lineHeight: "1.725rem", letterSpacing: "−0.0075rem" },
+        ],
+        base: ["1rem", { lineHeight: "1.3rem", letterSpacing: "0.012rem" }],
+      },
       colors: {
         primary: "#FF634D",
         red: "#FF453A",
