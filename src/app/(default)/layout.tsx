@@ -25,7 +25,7 @@ export default function DefaultLayout({
           </button>
         </div>
       </header>
-      <main>{children}</main>
+      <main className="min-h-screen">{children}</main>
       <footer className="bg-primary px-3 py-5 text-white">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16">

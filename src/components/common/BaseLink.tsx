@@ -7,6 +7,7 @@ type Props = {
   newTab?: boolean;
   children?: React.ReactNode;
   type?: "primary" | "secondary";
+  hideIcon?: boolean;
 };
 
 export default function BaseLink({
@@ -14,13 +15,16 @@ export default function BaseLink({
   newTab = false,
   children,
   type = "primary",
+  hideIcon = false,
 }: Props) {
   return (
     <BaseButton
       href={href}
       newTab={newTab}
       type={type}
-      icon={<ArrowIcon width={15} transform="rotate(-45)" />}
+      icon={
+        hideIcon ? undefined : <ArrowIcon width={15} transform="rotate(-45)" />
+      }
       iconPosition="right"
     >
       {children}

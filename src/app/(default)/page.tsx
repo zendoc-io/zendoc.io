@@ -33,6 +33,7 @@ export default function Home() {
       </section>
       <section className="mx-auto mb-10 max-w-6xl px-3">
         <ExpandableContainers
+          className="flex flex-col gap-4 lg:flex-row"
           containers={[
             {
               title:
