@@ -12,7 +12,7 @@ export default function FooterLink({ href, newTab = false, children }: Props) {
     <Link
       href={href}
       target={newTab ? "_blank" : "_self"}
-      className="underline-offset-2 hover:underline"
+      className="underline-offset-4 hover:underline"
     >
       {children}
     </Link>

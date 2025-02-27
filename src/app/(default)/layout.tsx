@@ -18,7 +18,6 @@ export default function DefaultLayout({
     subpaths?: {
       name: string;
       link: string;
-      image: string;
       description?: string;
     }[];
   }[] = [
@@ -32,7 +31,7 @@ export default function DefaultLayout({
       <header>
         <Header paths={paths} />
       </header>
-      <main className="min-h-screen">{children}</main>
+      <main>{children}</main>
       <footer className="bg-primary px-3 py-5 text-white">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16">

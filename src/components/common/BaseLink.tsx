@@ -1,12 +1,13 @@
 import React from "react";
 import BaseButton from "./BaseButton";
 import ArrowIcon from "@/public/icons/arrow.svg";
+import type { BaseButtonProps } from "./BaseButton";
 
 type Props = {
   href: string;
   newTab?: boolean;
   children?: React.ReactNode;
-  type?: "primary" | "secondary";
+  type?: BaseButtonProps["type"];
   hideIcon?: boolean;
 };
 

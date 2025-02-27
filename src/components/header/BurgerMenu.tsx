@@ -55,7 +55,7 @@ export default function BurgerMenu({ paths, show, close }: Props) {
       </div>
       <h2 className="ml-6 mt-10 text-xs uppercase opacity-60">Navigation</h2>
       <div className="mt-4 h-[1px] w-full bg-gray-500"></div>
-      <div className="px-6">
+      <nav className="px-6">
         {paths.map((path, pathIndex) =>
           path.subpaths ? (
             <div className="block text-3xl" key={`path-${pathIndex}`}>
@@ -115,7 +115,7 @@ export default function BurgerMenu({ paths, show, close }: Props) {
             </a>
           ),
         )}
-      </div>
+      </nav>
     </div>
   );
 }

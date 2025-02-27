@@ -24,8 +24,7 @@
   border-radius: 1px;
   top: 50%;
   right: 0;
-  background: black;
-  transition: all 0.3s ease;
+  background: currentColor;
 }
 
 .link--dropdown::before {
