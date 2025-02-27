@@ -1,29 +1,36 @@
 import React from "react";
-import LogoIcon from "@/public/logo.svg";
-import BurgerIcon from "@/public/icons/burger.svg";
 import Link from "next/link";
 import RoundedIcon from "@/src/components/common/RoundedIcon";
 import GithubIcon from "@/public/icons/github.svg";
 import RedditIcon from "@/public/icons/reddit.svg";
 import DiscordIcon from "@/public/icons/discord.svg";
 import FooterLink from "@/src/components/footer/FooterLink";
+import Header from "@/src/components/header/Header";
 
 export default function DefaultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const paths: {
+    name: string;
+    link: string;
+    subpaths?: {
+      name: string;
+      link: string;
+      image: string;
+      description?: string;
+    }[];
+  }[] = [
+    { name: "Home", link: "/" },
+    { name: "Feature roadmap", link: "/feature-roadmap" },
+    { name: "Transparency", link: "/transparency" },
+  ];
+
   return (
     <div>
       <header>
-        <div className="fixed left-1/2 top-0 z-10 mt-3 flex w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2 transform justify-between rounded-lg border bg-white p-3">
-          <Link href="/">
-            <LogoIcon width={130} />
-          </Link>
-          <button>
-            <BurgerIcon width={27} />
-          </button>
-        </div>
+        <Header paths={paths} />
       </header>
       <main className="min-h-screen">{children}</main>
       <footer className="bg-primary px-3 py-5 text-white">
