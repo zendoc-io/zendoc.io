@@ -1,6 +1,5 @@
 import BaseLink from "@/src/components/common/BaseLink";
 import React from "react";
-import ExpandableContainers from "@/src/components/informationDisplay/ExpandableContainers";
 import NewsletterSection from "@/src/components/sections/NewsletterSection";
 import GitHubIcon from "@/public/icons/github.svg";
 
