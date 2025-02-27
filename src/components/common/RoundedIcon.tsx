@@ -5,6 +5,7 @@ type Props = {
   size?: "sm" | "md" | "lg" | "xl";
   color?: string;
   background?: string;
+  className?: string;
 };
 
 export default function RoundedIcon({
@@ -12,6 +13,7 @@ export default function RoundedIcon({
   size = "md",
   color = "text-white",
   background = "bg-primary",
+  className = "",
 }: Props) {
   const sizeClasses = {
     sm: "h-6 w-6",
@@ -22,7 +24,7 @@ export default function RoundedIcon({
 
   return (
     <div
-      className={`grid shrink-0 place-content-center rounded-full ${sizeClasses[size]} ${color} ${background}`}
+      className={`grid shrink-0 place-content-center rounded-full ${sizeClasses[size]} ${color} ${background} ${className}`}
     >
       {children}
     </div>

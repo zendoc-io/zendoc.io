@@ -67,7 +67,7 @@ export default function Home() {
           ]}
         />
       </section>
-      <section className="relative mx-auto max-w-6xl overflow-hidden px-3 pb-10 md:overflow-auto">
+      <section className="relative mx-auto max-w-6xl overflow-hidden px-3 pb-10 md:overflow-x-auto">
         <h2 className="mb-7 text-3xl font-semibold">
           Open source is transparency
         </h2>

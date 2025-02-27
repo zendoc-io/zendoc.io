@@ -37,17 +37,32 @@ export default function NewsletterSection() {
         </p>
         <div className="flex items-center gap-6">
           <Link href="https://www.reddit.com/r/Zendoc/" target="_blank">
-            <RoundedIcon size="lg" background="bg-white" color="text-primary">
+            <RoundedIcon
+              size="lg"
+              background="bg-white"
+              color="text-primary"
+              className="hover:border-2 hover:border-white hover:bg-primary hover:text-white"
+            >
               <RedditIcon width={24} />
             </RoundedIcon>
           </Link>
           <Link href="https://discord.gg/RSpKEwDdeA" target="_blank">
-            <RoundedIcon size="lg" background="bg-white" color="text-primary">
+            <RoundedIcon
+              size="lg"
+              background="bg-white"
+              color="text-primary"
+              className="hover:border-2 hover:border-white hover:bg-primary hover:text-white"
+            >
               <DiscordIcon width={24} />
             </RoundedIcon>
           </Link>
           <Link href="https://github.com/zendoc-io" target="_blank">
-            <RoundedIcon size="lg" background="bg-white" color="text-primary">
+            <RoundedIcon
+              size="lg"
+              background="bg-white"
+              color="text-primary"
+              className="hover:border-2 hover:border-white hover:bg-primary hover:text-white"
+            >
               <GithubIcon width={24} />
             </RoundedIcon>
           </Link>

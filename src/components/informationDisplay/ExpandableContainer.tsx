@@ -8,7 +8,7 @@ type Props = {
   color: string;
   icon: React.ReactNode;
   children: React.ReactNode;
-  onOpen: () => void;
+  onOpen(): void;
   expanded: boolean;
 };
 

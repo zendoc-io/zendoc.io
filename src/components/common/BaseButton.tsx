@@ -20,9 +20,9 @@ export default function Button({
 }: Props) {
   const classes = {
     primary:
-      "w-fit flex items-center gap-3 rounded-lg bg-primary p-4 px-6 font-semibold text-white tracking-[0.016rem]",
+      "w-fit flex items-center gap-3 rounded-lg bg-primary p-4 px-6 font-semibold text-white tracking-[0.016rem] hover:bg-primary-dark",
     secondary:
-      "w-fit flex items-center gap-3 rounded-lg bg-white p-4 px-6 font-semibold text-black border border-black tracking-[0.016rem]",
+      "w-fit flex items-center gap-3 rounded-lg bg-white p-4 px-6 font-semibold text-black border border-black tracking-[0.016rem] hover:bg-black hover:text-white",
   }[type];
 
   return href ? (
