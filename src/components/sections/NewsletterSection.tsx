@@ -90,7 +90,11 @@ export default function NewsletterSection() {
           inbox.
         </p>
         <div className="grid gap-4">
-          <BaseInput placeholder="Your E-Mail" onChange={handleEmailChange} />
+          <BaseInput
+            placeholder="Your E-Mail"
+            value={email}
+            onChange={handleEmailChange}
+          />
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
@@ -109,8 +113,6 @@ export default function NewsletterSection() {
           >
             {status.type === "loading" ? "Subscribing..." : "Subscribe"}
           </BaseButton>
-
-          {/* Status message removed - using toast instead */}
         </div>
       </div>
       <div className="my-4 h-[2px] bg-white md:hidden"></div>
@@ -153,7 +155,6 @@ export default function NewsletterSection() {
         </div>
       </div>
 
-      {/* Toast notification */}
       {toast.visible && (
         <div
           className={`fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg p-4 shadow-lg transition-all duration-300 ${
