@@ -25,17 +25,20 @@ export default function FeatureRoadmapPage() {
       <section className="mx-auto mb-10 grid max-w-6xl gap-12 px-3 md:grid-cols-2">
         <div>
           <h2 className="mb-2 text-3xl font-semibold">Data collection</h2>
-          <p>
+          <div>
             We believe your infrastructure data belongs to you—not us. By
             design, our platform operates under the following principle: <br />
-            <b>Zero automatic data collection</b>
-            <br />
-            <br />
-            We only offer a voluntary opt-in for <b>crash reports</b> and{" "}
-            <b>anonymized statistics</b> such as: 20% of users have 32GB RAM The
-            average homelab runs 15 services The crash/error reports help us to
-            improve Zendoc without you needing to open an issue.
-          </p>
+            <b>Zero automatic telemetry collection</b> We only offer a voluntary
+            opt-in for <b>crash reports</b> and <b>anonymized statistics </b>
+            such as: <br />
+            <ol className="list-disc p-4">
+              <li>20% of users have 32GB RAM</li>
+              <li>The average homelab runs 15 services</li>
+            </ol>
+            The
+            <b> crash/error reports</b> help us to improve Zendoc without you
+            needing to open an issue.
+          </div>
         </div>
         <div>
           <h2 className="mb-2 text-3xl font-semibold">Future pricing</h2>
@@ -46,6 +49,23 @@ export default function FeatureRoadmapPage() {
             For commercial use Zendoc will introduce a pricing model in the
             future. We think that this is a great opportunity for us to develop
             this project better.
+          </p>
+        </div>
+        <div>
+          <h2 className="mb-2 text-3xl font-semibold">Open-Source</h2>
+          <p>
+            Zendoc will stay open source forever.
+            <br />
+            <br />
+            This allows us you to contribute directly to Zendoc. It’s also a key
+            point for us to stay as transparent as possible.
+          </p>
+        </div>
+        <div>
+          <h2 className="mb-2 text-3xl font-semibold">Future ideas</h2>
+          <p>
+            🫵 You decide which features Zendoc should introduce next and what
+            the projects focus should be.
           </p>
         </div>
       </section>

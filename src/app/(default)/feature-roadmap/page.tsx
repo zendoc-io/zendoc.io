@@ -26,19 +26,46 @@ export default function FeatureRoadmapPage() {
         expanded: true,
       },
       {
-        title: "File storage",
+        title: "Config Manager",
         status: "planned",
-        description: "test",
+        description:
+          "Using our config manager, you are able to reuse your configuration files on the fly and over the network for devices and services alike.",
       },
       {
         title: "Custom markdown documents",
         status: "planned",
-        description: "test",
+        description:
+          "An integrated markdown viewer and editor ensures that you can edit your documents directly in Zendoc.",
       },
       {
-        title: "Uptime monitoring",
+        title: "Hardware",
         status: "planned",
-        description: "test",
+        description:
+          "Using our Zendoc Agents, we collect hardware information for the documentation and other Zendoc tools.",
+      },
+      {
+        title: "Network documentation",
+        status: "planned",
+        description:
+          "We want to create a system that allows you to have an always up-to-date network documentation. This will allow you to monitor, visualize and debug most networks.",
+      },
+      {
+        title: "Monitoring",
+        status: "planned",
+        description:
+          "With our Monitoring module, we give you access to all information about your devices and services. This helps us to build a complete infrastructure overview for you.",
+      },
+      {
+        title: "Daemon",
+        status: "planned",
+        description:
+          "Our Daemon (Agent) is a locally running piece of software that provides your Zendoc instance with all the information and control needed.",
+      },
+      {
+        title: "Enterprise features",
+        status: "planned",
+        description:
+          "To make Zendoc accessible to businesses we want to add essential features like a permission system, API, LDAP/AD and SSO support.",
       },
     ];
 
