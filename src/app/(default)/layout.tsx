@@ -21,10 +21,12 @@ export default function DefaultLayout({
       description?: string;
     }[];
   }[] = [
-    { name: "Home", link: "/" },
-    { name: "Feature roadmap", link: "/feature-roadmap" },
-    { name: "Transparency", link: "/transparency" },
-  ];
+      { name: "Home", link: "/" },
+      { name: "Feature roadmap", link: "/feature-roadmap" },
+      { name: "Transparency", link: "/transparency" },
+      { name: "Imprint", link: "/imprint" },
+      { name: "Privacy", link: "/privacy" },
+    ];
 
   return (
     <div>
@@ -82,10 +84,8 @@ export default function DefaultLayout({
               © 2023 Zendoc. All rights reserved.
             </p>
             <div className="flex items-center gap-3 text-sm">
-              <FooterLink href="/legal/imprint">Imprint</FooterLink>
-              <FooterLink href="/legal/privacy-policy">
-                Privacy policy
-              </FooterLink>
+              <FooterLink href="/imprint">Imprint</FooterLink>
+              <FooterLink href="/privacy">Privacy policy</FooterLink>
             </div>
           </div>
         </div>

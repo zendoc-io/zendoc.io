@@ -17,6 +17,7 @@ export async function POST(req: Request) {
   try {
     body = (await req.json()) as Body;
   } catch (err) {
+    console.error(err);
     return new Response("Invalid request body!", { status: 400 });
   }
   const { email, extensive } = body;
