@@ -8,6 +8,8 @@ export type BaseButtonProps = {
   type?: "primary" | "secondary" | "small" | "comingsoon";
   href?: string;
   newTab?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
 };
 
 export default function Button({
@@ -17,8 +19,10 @@ export default function Button({
   type = "primary",
   href,
   newTab = false,
+  onClick,
+  disabled = false,
 }: BaseButtonProps) {
-  const classes = {
+  const baseClasses = {
     primary:
       "w-fit flex items-center gap-3 rounded-lg bg-primary p-4 px-6 font-semibold text-white tracking-[0.016rem] hover:bg-primary-dark",
     secondary:
@@ -28,6 +32,10 @@ export default function Button({
     comingsoon:
       "w-fit flex items-center gap-3 rounded-lg bg-gray-300 p-4 px-6 font-semibold text-gray-500 tracking-[0.016rem] cursor-not-allowed relative overflow-hidden",
   }[type];
+
+  const disabledClass =
+    disabled && type !== "comingsoon" ? "opacity-50 cursor-not-allowed" : "";
+  const classes = `${baseClasses} ${disabledClass}`;
 
   if (type === "comingsoon") {
     return (
@@ -47,14 +55,22 @@ export default function Button({
     );
   }
 
-  return href ? (
-    <Link href={href} className={classes} target={newTab ? "_blank" : "_self"}>
-      {iconPosition === "left" && icon}
-      {children}
-      {iconPosition === "right" && icon}
-    </Link>
-  ) : (
-    <button className={classes}>
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={classes}
+        target={newTab ? "_blank" : "_self"}
+      >
+        {iconPosition === "left" && icon}
+        {children}
+        {iconPosition === "right" && icon}
+      </Link>
+    );
+  }
+
+  return (
+    <button className={classes} onClick={onClick} disabled={disabled}>
       {iconPosition === "left" && icon}
       {children}
       {iconPosition === "right" && icon}
