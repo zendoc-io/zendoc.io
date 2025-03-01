@@ -2,6 +2,7 @@ import conn from "@/src/lib/db";
 import { encrypt } from "@/src/lib/encryption";
 import { hash } from "@/src/lib/hashing";
 import { checkEmailRegEx } from "@/src/lib/validation";
+import { emailService } from "@/src/lib/emailService";
 import { QueryResult } from "pg";
 
 interface Body {
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
 
   const emailHash = hash(email);
   if (!emailHash) {
-    return new Response("Something wen't wrong!", { status: 500 });
+    return new Response("Something went wrong!", { status: 500 });
   }
 
   try {
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
 
     const cipherText = encrypt(email);
     if (!cipherText) {
-      return new Response("Something wen't wrong!", { status: 500 });
+      return new Response("Something went wrong!", { status: 500 });
     }
 
     response = await conn?.query(
@@ -60,12 +61,44 @@ export async function POST(req: Request) {
         status: 500,
       });
     }
+
     if (response.rowCount !== null && response.rowCount > 0) {
-      return new Response("Newsletter sign-up successfull!");
+      try {
+        await emailService.sendNewsletterConfirmation(email, extensive);
+        return new Response("Newsletter sign-up successful!");
+      } catch (emailErr) {
+        console.error("Failed to send confirmation email:", emailErr);
+        try {
+          await conn?.query(`DELETE FROM newsletter WHERE hash = $1`, [
+            emailHash,
+          ]);
+          return new Response(
+            "Newsletter sign-up failed. Please contact support.",
+            {
+              status: 500,
+            },
+          );
+        } catch (deleteErr) {
+          console.error(
+            "Failed to remove database entry after email failure:",
+            deleteErr,
+          );
+          return new Response(
+            "Newsletter sign-up failed. Please contact support.",
+            {
+              status: 500,
+            },
+          );
+        }
+      }
     }
+
+    return new Response("Newsletter sign-up failed. Please contact support.", {
+      status: 500,
+    });
   } catch (err) {
     console.error(err);
-    return new Response("Newsletter sign-up failed!", {
+    return new Response("Newsletter sign-up failed. Please contact support.", {
       status: 500,
     });
   }
