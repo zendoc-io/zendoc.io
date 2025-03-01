@@ -8,6 +8,7 @@ import CheckMarkText from "@/src/components/informationDisplay/CheckMarkText";
 import GitHubIcon from "@/public/icons/github.svg";
 import NewsletterSection from "@/src/components/sections/NewsletterSection";
 import SideSection from "@/src/components/informationDisplay/SideSection";
+import Button from "@/src/components/common/BaseButton";
 
 export default function Home() {
   const style = {
@@ -36,11 +37,14 @@ export default function Home() {
           className="flex flex-col gap-4 lg:flex-row"
           containers={[
             {
-              title:
-                "Keep an eye on your entire IT-Infrastructure in one platform",
+              title: "Always keep track of your infrastructure.",
               color: "#C8E6FE",
               icon: <EyeIcon height={26} />,
-              children: <p>test</p>,
+              children: (
+                <p>
+                  All of documentation combined <b>in one place.</b>
+                </p>
+              ),
             },
             {
               title: "Automatically maintain documentation",
@@ -57,13 +61,25 @@ export default function Home() {
               title: "Seamless integration with your tools",
               color: "#E5E1F8",
               icon: <NetworkIcon height={26} />,
-              children: <p>test</p>,
+              children: (
+                <p>
+                  Integrate Zendoc Service Agents into your existing programs
+                  and docker containers.
+                </p>
+              ),
             },
             {
-              title: "Your data never leaves your network",
+              title: "Keep your data internal.",
               color: "#D8FAFF",
               icon: <LockIcon height={26} />,
-              children: <p>test</p>,
+              children: (
+                <p>
+                  We collect nothing automatically. You can opt-in to share
+                  anonymous statistics and crash reports to help improve Zendoc,
+                  but your infrastructure data always remains completely under
+                  your control.
+                </p>
+              ),
             },
           ]}
         />
@@ -104,8 +120,8 @@ export default function Home() {
             }}
           >
             <p>
-              Each server runs a Zendoc Server Agent, which collects data about
-              the server. Each service includes a Zendoc SDK Agent, which
+              Each server runs a Zendoc Server Agent that collects data for
+              documentation. Each service includes a Zendoc Service Agent that
               reports data about the service itself.
             </p>
           </SideSection>
@@ -120,8 +136,8 @@ export default function Home() {
             direction="right"
           >
             <p>
-              The Zendoc Documentation Engine will automatically detect and
-              manage any changes that would otherwise require manual labor.
+              The Zendoc Engine will automatically detect and manage any changes
+              that would otherwise require manual labor.
             </p>
           </SideSection>
           <SideSection
@@ -134,8 +150,8 @@ export default function Home() {
             }}
           >
             <p>
-              You can access the Zendoc Instance and view the latest information
-              about each server, virtual machine and service.
+              You can access the Zendoc instance and retrieve all your
+              information on the spot.
             </p>
           </SideSection>
         </div>
@@ -146,6 +162,10 @@ export default function Home() {
           Enjoy our live demo (when available), or for those who are further
           interested, simply visit our repository and interact with us directly.
         </p>
+        <Button type="comingsoon">
+          <p>View Demo</p>
+        </Button>
+        <div className="h-4"></div>
         <BaseLink href="https://github.com/zendoc-io" newTab>
           Zendoc on GitHub
         </BaseLink>
