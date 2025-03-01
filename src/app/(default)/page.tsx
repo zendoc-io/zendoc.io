@@ -24,7 +24,6 @@ export default function Home() {
         </h1>
         <p className="mt-4 text-center text-gray-600">
           Eliminate the hassle of manual documentation.
-          <br /> Save time and nerves.
         </p>
         <div className="mx-auto mt-6 w-fit">
           <BaseLink href="https://github.com/zendoc-io" newTab>
