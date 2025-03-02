@@ -4,11 +4,11 @@ export class CryptService {
   constructor() {}
 
   encrypt(data: string): string | null {
-    if (!process.env.ENCYRPTION_KEY || process.env.ENCRYPTION_KEY === "") {
+    if (!process.env.ENCRYPTION_KEY || process.env.ENCRYPTION_KEY === "") {
       return null;
     }
 
-    const key = Buffer.from(process.env.ENCYRPTION_KEY.trim(), "hex");
+    const key = Buffer.from(process.env.ENCRYPTION_KEY.trim(), "hex");
 
     const iv = crypto.randomBytes(16);
     const algorithm = "aes-256-cbc";
@@ -19,7 +19,7 @@ export class CryptService {
   }
 
   decrypt(data: string): string | null {
-    if (!process.env.ENCYRPTION_KEY || process.env.ENCRYPTION_KEY === "") {
+    if (!process.env.ENCRYPTION_KEY || process.env.ENCRYPTION_KEY === "") {
       return null;
     }
 
@@ -28,7 +28,7 @@ export class CryptService {
       return null;
     }
 
-    const key = Buffer.from(process.env.ENCYRPTION_KEY.trim(), "hex");
+    const key = Buffer.from(process.env.ENCRYPTION_KEY.trim(), "hex");
     const iv = Buffer.from(splitData[0].trim(), "hex");
 
     const algorithm = "aes-256-cbc";

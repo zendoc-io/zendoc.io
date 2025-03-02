@@ -6,6 +6,14 @@ import RedditIcon from "@/public/icons/reddit.svg";
 import DiscordIcon from "@/public/icons/discord.svg";
 import FooterLink from "@/src/components/footer/FooterLink";
 import Header from "@/src/components/header/Header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  openGraph: {
+    siteName: "Zendoc",
+    images: [{ url: "https://zendoc.io/icon.png" }],
+  },
+};
 
 export default function DefaultLayout({
   children,
@@ -21,12 +29,10 @@ export default function DefaultLayout({
       description?: string;
     }[];
   }[] = [
-      { name: "Home", link: "/" },
-      { name: "Feature roadmap", link: "/feature-roadmap" },
-      { name: "Transparency", link: "/transparency" },
-      { name: "Imprint", link: "/imprint" },
-      { name: "Privacy", link: "/privacy" },
-    ];
+    { name: "Home", link: "/" },
+    { name: "Feature roadmap", link: "/feature-roadmap" },
+    { name: "Transparency", link: "/transparency" },
+  ];
 
   return (
     <div>
@@ -81,7 +87,7 @@ export default function DefaultLayout({
           </div>
           <div>
             <p className="mb-3 mt-5 text-sm">
-              © 2023 Zendoc. All rights reserved.
+              © {new Date().getFullYear()} Zendoc. All rights reserved.
             </p>
             <div className="flex items-center gap-3 text-sm">
               <FooterLink href="/imprint">Imprint</FooterLink>

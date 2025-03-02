@@ -1,4 +1,11 @@
+import { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Imprint - Zendoc",
+  description:
+    "Use Zendoc to automate your documentation and keep track of your infrastructure.",
+};
 
 export default function Imprint() {
   const companyData = {
@@ -17,7 +24,7 @@ export default function Imprint() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl bg-white p-8 pt-24 text-gray-800">
+    <div className="mx-auto max-w-4xl bg-white px-3 pb-3 pt-24 text-gray-800">
       <h1 className="mb-6 text-3xl font-bold">Imprint</h1>
 
       <div className="mb-6">
@@ -48,12 +55,12 @@ export default function Imprint() {
           <p>
             <strong>Phone:</strong> {companyData.phone}
           </p>
-          <p>
+          <a className="block" href={`mailto:${companyData.email}`}>
             <strong>Email:</strong> {companyData.email}
-          </p>
-          <p>
+          </a>
+          <a className="block" href={companyData.website}>
             <strong>Website:</strong> {companyData.website}
-          </p>
+          </a>
         </div>
       </section>
 

@@ -83,7 +83,7 @@ export default function VerifyNewsletter() {
 
   return (
     <div className="min-h-[calc(76vh)]">
-      <div className="mx-auto max-w-4xl bg-white p-8 pb-12 pt-24 text-gray-800">
+      <div className="mx-auto max-w-4xl bg-white px-4 pb-12 pt-24 text-gray-800">
         <h1 className="mb-6 text-3xl font-bold">Email Verification</h1>
 
         <div className="mb-10">

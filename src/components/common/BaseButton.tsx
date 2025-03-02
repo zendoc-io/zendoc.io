@@ -12,7 +12,7 @@ export type BaseButtonProps = {
   disabled?: boolean;
 };
 
-export default function Button({
+export default function BaseButton({
   children,
   icon,
   iconPosition = "left",

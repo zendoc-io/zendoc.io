@@ -48,7 +48,7 @@ export class EmailService {
     token: string,
   ): Promise<void> {
     try {
-      const verificationUrl = `https://zendoc.io/api/newsletter/verify?token=${token}}`;
+      const verificationUrl = `https://zendoc.io/api/newsletter/verify?token=${token}`;
       const subscriptionType = extensive ? "comprehensive" : "release-only";
 
       const html = `
