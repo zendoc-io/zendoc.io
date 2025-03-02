@@ -36,5 +36,6 @@ jobs:
             -e SMTP_PASSWORD="${{ secrets.SMTP_PASSWORD }}" \
             -e SMTP_USER="${{ secrets.SMTP_USER }}" \
             -e SMTP_FROM="${{ secrets.SMTP_FROM }}" \
+            -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
             --restart unless-stopped \
             zendoc.io:latest
