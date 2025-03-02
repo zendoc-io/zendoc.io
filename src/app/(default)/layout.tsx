@@ -6,6 +6,14 @@ import RedditIcon from "@/public/icons/reddit.svg";
 import DiscordIcon from "@/public/icons/discord.svg";
 import FooterLink from "@/src/components/footer/FooterLink";
 import Header from "@/src/components/header/Header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  openGraph: {
+    siteName: "Zendoc",
+    images: [{ url: "https://zendoc.io/icon.png" }],
+  },
+};
 
 export default function DefaultLayout({
   children,

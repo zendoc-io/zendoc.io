@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   title: "Zendoc - Automate your Documentation",
   description:
     "Use Zendoc to automate your documentation and keep track of your infrastructure.",
+  openGraph: {
+    siteName: "Zendoc",
+    images: [{ url: "https://zendoc.io/icon.png" }],
+  },
 };
 
 export default function Home() {
