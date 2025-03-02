@@ -104,12 +104,33 @@ export default function NewsletterSection() {
             onChange={handleEmailChange}
           />
           <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id={`more-info-${uniqueId}`}
-              checked={extensive}
-              onChange={(e) => setExtensive(e.target.checked)}
-            />
+            <div className="relative">
+              <input
+                type="checkbox"
+                id={`more-info-${uniqueId}`}
+                checked={extensive}
+                onChange={(e) => setExtensive(e.target.checked)}
+                className="peer flex h-5 w-5 cursor-pointer appearance-none items-center justify-center rounded border-2 border-white bg-transparent transition-all checked:border-white checked:bg-white"
+              />
+              <div className="pointer-events-none absolute left-[2px] top-[2px] flex h-4 w-4 items-center justify-center text-black opacity-0 transition-opacity peer-checked:opacity-100">
+                <svg
+                  width="14"
+                  height="11"
+                  viewBox="0 0 14 11"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 5.5L5 9.5L13 1.5"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
             <label htmlFor={`more-info-${uniqueId}`}>
               I also want non-release related information.
             </label>
@@ -165,11 +186,10 @@ export default function NewsletterSection() {
 
       {toast.visible && (
         <div
-          className={`fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg p-4 shadow-lg transition-all duration-300 ${
-            toast.type === "success"
+          className={`fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg p-4 shadow-lg transition-all duration-300 ${toast.type === "success"
               ? "bg-green text-white"
               : "bg-red text-white"
-          }`}
+            }`}
         >
           <div className="text-sm font-medium">{toast.message}</div>
           <button
