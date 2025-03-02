@@ -64,12 +64,20 @@ export default function NewsletterSection() {
       });
 
       if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(errorData || "Failed to subscribe");
+        const errorData = await response.json();
+        throw new Error(errorData?.error || "Failed to subscribe");
+      }
+
+      const body = await response.json();
+      if (!body.message) {
+        console.error("Couldn't find body.message from /api/newsletter/signup");
       }
 
       setStatus({ type: "idle", message: "" });
-      showToast("success", "Thank you for subscribing!");
+      showToast(
+        "success",
+        body.message || "Verification email sent. Please check your inbox.",
+      );
       setEmail("");
       setExtensive(false);
     } catch (error) {
@@ -157,10 +165,11 @@ export default function NewsletterSection() {
 
       {toast.visible && (
         <div
-          className={`fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg p-4 shadow-lg transition-all duration-300 ${toast.type === "success"
+          className={`fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg p-4 shadow-lg transition-all duration-300 ${
+            toast.type === "success"
               ? "bg-green text-white"
               : "bg-red text-white"
-            }`}
+          }`}
         >
           <div className="text-sm font-medium">{toast.message}</div>
           <button

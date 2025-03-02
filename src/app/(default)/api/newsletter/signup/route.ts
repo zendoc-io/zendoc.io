@@ -66,7 +66,7 @@ export async function POST(req: Request) {
     ) {
       await conn?.query("COMMIT");
       return NextResponse.json(
-        { message: "This email is already subscribed to our newsletter" },
+        { error: "This email is already subscribed to our newsletter" },
         { status: 409 },
       );
     }
@@ -107,7 +107,11 @@ export async function POST(req: Request) {
     const cipherText = cryptService.encrypt(email);
     if (!cipherText) {
       await conn?.query("ROLLBACK");
-      return NextResponse.json({ error: "Encryption failed" }, { status: 500 });
+      console.error("Encryption failed!");
+      return NextResponse.json(
+        { error: "Something wen't wrong!" },
+        { status: 500 },
+      );
     }
 
     const verificationToken = cryptService.createVerificationToken();

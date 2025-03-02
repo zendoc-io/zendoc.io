@@ -57,7 +57,7 @@ export default function UnsubscribeNewsletter() {
           });
       }
     }
-  }, [searchParams]);
+  }, [searchParams, statusParam]);
 
   const handleEmailUnsubscribe = async () => {
     if (!email) {
