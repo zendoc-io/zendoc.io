@@ -1,9 +1,16 @@
+import { Metadata } from "next";
 import React from "react";
 
 interface ThirdPartyService {
   name: string;
   url: string;
 }
+
+export const metadata: Metadata = {
+  title: "Privacy Policy - Zendoc",
+  description:
+    "Use Zendoc to automate your documentation and keep track of your infrastructure.",
+};
 
 export default function PrivacyPolicy() {
   const thirdPartyServices: ThirdPartyService[] = [

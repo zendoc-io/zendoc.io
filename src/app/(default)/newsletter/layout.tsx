@@ -6,6 +6,13 @@ import RedditIcon from "@/public/icons/reddit.svg";
 import DiscordIcon from "@/public/icons/discord.svg";
 import FooterLink from "@/src/components/footer/FooterLink";
 import Header from "@/src/components/header/Header";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Newsletter Subscription - Zendoc",
+  description:
+    "Use Zendoc to automate your documentation and keep track of your infrastructure.",
+};
 
 export default function DefaultLayout({
   children,
@@ -21,12 +28,10 @@ export default function DefaultLayout({
       description?: string;
     }[];
   }[] = [
-      { name: "Home", link: "/" },
-      { name: "Feature roadmap", link: "/feature-roadmap" },
-      { name: "Transparency", link: "/transparency" },
-      { name: "Imprint", link: "/imprint" },
-      { name: "Privacy", link: "/privacy" },
-    ];
+    { name: "Home", link: "/" },
+    { name: "Feature roadmap", link: "/feature-roadmap" },
+    { name: "Transparency", link: "/transparency" },
+  ];
 
   return (
     <div>

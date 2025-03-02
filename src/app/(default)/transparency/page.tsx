@@ -2,6 +2,13 @@ import BaseLink from "@/src/components/common/BaseLink";
 import React from "react";
 import NewsletterSection from "@/src/components/sections/NewsletterSection";
 import GitHubIcon from "@/public/icons/github.svg";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Transparency - Zendoc",
+  description:
+    "We belive in open-source and want to keep you up to date with future company decisions.",
+};
 
 export default function FeatureRoadmapPage() {
   const style = {

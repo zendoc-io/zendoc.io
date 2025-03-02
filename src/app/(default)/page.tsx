@@ -8,7 +8,14 @@ import CheckMarkText from "@/src/components/informationDisplay/CheckMarkText";
 import GitHubIcon from "@/public/icons/github.svg";
 import NewsletterSection from "@/src/components/sections/NewsletterSection";
 import SideSection from "@/src/components/informationDisplay/SideSection";
-import Button from "@/src/components/common/BaseButton";
+import BaseButton from "@/src/components/common/BaseButton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Zendoc - Automate your Documentation",
+  description:
+    "Use Zendoc to automate your documentation and keep track of your infrastructure.",
+};
 
 export default function Home() {
   const style = {
@@ -164,9 +171,9 @@ export default function Home() {
           Enjoy our live demo (when available), or for those who are further
           interested, simply visit our repository and interact with us directly.
         </p>
-        <Button type="comingsoon">
+        <BaseButton type="comingsoon">
           <p>View Demo</p>
-        </Button>
+        </BaseButton>
         <div className="h-4"></div>
         <BaseLink href="https://github.com/zendoc-io" newTab>
           Zendoc on GitHub
