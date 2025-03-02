@@ -6,10 +6,17 @@ import { cryptService } from "@/src/lib/crypt";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const token = searchParams.get("token");
+  const url = process.env.NEXT_PUBLIC_BASE_URL || "https://zendoc.io";
+  if (!url) {
+    console.error("BaseURL wasn't found!");
+    return NextResponse.redirect(
+      new URL("https://zendoc.io/newsletter/verified?status=invalid"),
+    );
+  }
 
   if (!token) {
     return NextResponse.redirect(
-      new URL("/newsletter/verified?status=invalid", request.url),
+      new URL(`${url}/newsletter/verified?status=invalid`),
     );
   }
 
@@ -27,7 +34,7 @@ export async function GET(request: Request) {
     if (!verificationResult?.rows.length) {
       await conn?.query("ROLLBACK");
       return NextResponse.redirect(
-        new URL("/newsletter/verified?status=invalid", request.url),
+        new URL(`${url}/newsletter/verified?status=invalid`),
       );
     }
 
@@ -36,7 +43,7 @@ export async function GET(request: Request) {
     if (new Date(subscriptionData.expires_at) < new Date()) {
       await conn?.query("ROLLBACK");
       return NextResponse.redirect(
-        new URL("/newsletter/verified?status=expired", request.url),
+        new URL(`${url}/newsletter/verified?status=expired`),
       );
     }
 
@@ -45,7 +52,7 @@ export async function GET(request: Request) {
       console.error("Email decryption failed!");
       await conn?.query("ROLLBACK");
       return NextResponse.redirect(
-        new URL("/newsletter/verified?status=error", request.url),
+        new URL(`${url}/newsletter/verified?status=error`),
       );
     }
 
@@ -56,7 +63,7 @@ export async function GET(request: Request) {
 
       await conn?.query("COMMIT");
       return NextResponse.redirect(
-        new URL("/newsletter/verified?status=already-verified", request.url),
+        new URL(`${url}/newsletter/verified?status=already-verified`),
       );
     }
 
@@ -76,13 +83,13 @@ export async function GET(request: Request) {
       .catch((err) => console.error("Failed to send welcome email:", err));
 
     return NextResponse.redirect(
-      new URL("/newsletter/verified?status=success", request.url),
+      new URL(`${url}/newsletter/verified?status=success`),
     );
   } catch (err) {
     console.error("Verification error:", err);
     await conn?.query("ROLLBACK");
     return NextResponse.redirect(
-      new URL("/newsletter/verified?status=error", request.url),
+      new URL(`${url}/newsletter/verified?status=error`),
     );
   }
 }

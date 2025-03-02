@@ -67,14 +67,11 @@ export default function VerifyNewsletter() {
       return;
     }
 
-    // If no status parameter but we have a token, it means the user accessed
-    // this page directly with a token instead of through the redirect
     if (token) {
       window.location.href = `/api/newsletter/verify?token=${token}`;
       return;
     }
 
-    // If no token and no status, show an error
     if (!token && !statusParam) {
       setStatus({
         type: "error",
