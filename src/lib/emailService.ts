@@ -1,4 +1,5 @@
 import * as nodemailer from "nodemailer";
+import { cryptService } from "./crypt";
 
 interface EmailOptions {
   to: string;
@@ -11,12 +12,6 @@ export class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
-    console.log(
-      process.env.SMTP_PORT,
-      process.env.SMTP_SECURE,
-      process.env.SMTP_USER,
-      process.env.SMTP_PASSWORD,
-    );
     this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT || "465"),
@@ -48,13 +43,109 @@ export class EmailService {
     }
   }
 
+  async sendVerificationEmail(
+    email: string,
+    extensive: boolean,
+  ): Promise<void> {
+    try {
+      const token = cryptService.createVerificationToken();
+      const verificationUrl = `https://zendoc.io/newsletter/verify?token=${token}}`;
+      const subscriptionType = extensive ? "comprehensive" : "release-only";
+
+      const html = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Confirm Your Zendoc Newsletter Subscription</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap');
+          </style>
+        </head>
+        <body style="margin: 0; padding: 0; font-family: 'Golos Text', Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; border: 0;">
+            <tr>
+              <td style="padding: 20px 0; text-align: center; background-color: #f5f5f5;">
+                <table role="presentation" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                  <!-- Header with Logo -->
+                  <tr>
+                    <td style="padding: 40px 30px; text-align: center; background-color: #FF634D;">
+                      <h1 style="margin: 0; color: white; font-size: 24px; font-weight: 700; letter-spacing: -0.5px;">Confirm Your Zendoc Newsletter Subscription</h1>
+                    </td>
+                  </tr>
+                  
+                  <!-- Main Content -->
+                  <tr>
+                    <td style="padding: 30px; background-color: #ffffff;">
+                      <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%;">
+                        <tr>
+                          <td>
+                            <p style="margin: 0 0 15px; font-size: 16px; line-height: 24px;">Hello,</p>
+                            <p style="margin: 0 0 20px; font-size: 16px; line-height: 24px;">Thank you for your interest in the Zendoc newsletter. Please confirm your subscription by clicking the button below:</p>
+                            
+                            <!-- Verification Button -->
+                            <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin: 30px 0;">
+                              <tr>
+                                <td style="text-align: center;">
+                                  <div>
+                                    <a href="${verificationUrl}" style="display: inline-block; padding: 12px 24px; background-color: #FF634D; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px;">Confirm My Subscription</a>
+                                  </div>
+                                  <p style="margin: 15px 0 0; font-size: 13px; color: #666;">If the button doesn't work, copy and paste this link into your browser:</p>
+                                  <p style="margin: 5px 0 0; font-size: 12px; color: #999; word-break: break-all;">${verificationUrl}</p>
+                                </td>
+                              </tr>
+                            </table>
+                            
+                            <div style="background-color: #f8f8f8; border-left: 4px solid #FF634D; padding: 15px; margin-bottom: 20px; border-radius: 0 4px 4px 0;">
+                              <p style="margin: 0; font-size: 16px; color: #333;">You've selected our <strong style="color: #FF634D;">${subscriptionType}</strong> newsletter subscription.</p>
+                            </div>
+                            
+                            <p style="margin: 20px 0 0; font-size: 16px; line-height: 24px;">This verification link will expire in 24 hours. If you did not request this subscription, you can simply ignore this email.</p>
+                            
+                            <p style="margin: 20px 0 0; font-size: 16px; line-height: 24px;">Best regards,<br>The Zendoc Team</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  
+                  <!-- Footer -->
+                  <tr>
+                    <td style="padding: 20px 30px; background-color: #f8f8f8; border-top: 1px solid #eeeeee; text-align: center; color: #666666;">
+                      <p style="margin: 0 0 10px; font-size: 12px; line-height: 18px;">© ${new Date().getFullYear()} Merckel u. Witzdam GbR. All rights reserved.</p>
+                      <p style="margin: 10px 0 0; font-size: 12px; line-height: 18px; color: #999999;">
+                        Merckel u. Witzdam GbR, Im Winkel 23, 45896 Gelsenkirchen, Germany
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+        </html>
+      `;
+
+      await this.sendEmail({
+        to: email,
+        subject: "Confirm Your Zendoc Newsletter Subscription",
+        html: html,
+      });
+    } catch (error) {
+      console.error("Failed to send verification email:", error);
+      throw new Error("Failed to send verification email");
+    }
+  }
+
   async sendNewsletterConfirmation(
     email: string,
     extensive: boolean,
   ): Promise<void> {
-    const subscriptionType = extensive ? "comprehensive" : "release-only";
+    try {
+      const subscriptionType = extensive ? "comprehensive" : "release-only";
 
-    const html = `
+      const html = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -93,7 +184,7 @@ export class EmailService {
                           <p style="margin: 0 0 15px; font-size: 16px; line-height: 24px;">Here's what you can expect to receive from us:</p>
                           
                           ${extensive
-        ? `
+          ? `
                           <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
                             <tr>
                               <td style="padding: 10px; background-color: #FFF8F7; border-radius: 4px;">
@@ -135,7 +226,7 @@ export class EmailService {
                             </tr>
                           </table>
                           `
-        : `
+          : `
                           <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
                             <tr>
                               <td style="padding: 10px; background-color: #FFF8F7; border-radius: 4px;">
@@ -161,7 +252,7 @@ export class EmailService {
                             </tr>
                           </table>
                           `
-      }
+        }
                           
                           <p style="margin: 0 0 20px; font-size: 16px; line-height: 24px;">Looking for more ways to get involved?</p>
                           
@@ -195,7 +286,7 @@ export class EmailService {
                     <p style="margin: 0 0 10px; font-size: 12px; line-height: 18px;">© ${new Date().getFullYear()} Merckel u. Witzdam GbR. All rights reserved.</p>
                     <p style="margin: 0; font-size: 12px; line-height: 18px;">
                       If you didn't subscribe to this newsletter, please 
-                      <a href="https://zendoc.io/unsubscribe" style="color: #FF634D; text-decoration: none; font-weight: 500;">unsubscribe here</a>.
+                      <a href="https://zendoc.io/newsletter/unsubscribe" style="color: #FF634D; text-decoration: none; font-weight: 500;">unsubscribe here</a>.
                     </p>
                     <p style="margin: 10px 0 0; font-size: 12px; line-height: 18px; color: #999999;">
                       Merckel u. Witzdam GbR, Im Winkel 23, 45896 Gelsenkirchen, Germany
@@ -210,11 +301,14 @@ export class EmailService {
       </html>
     `;
 
-    await this.sendEmail({
-      to: email,
-      subject: "Welcome to Zendoc Newsletter",
-      html: html,
-    });
+      await this.sendEmail({
+        to: email,
+        subject: "Welcome to Zendoc Newsletter",
+        html: html,
+      });
+    } catch (err) {
+      console.error("Sending welcome email failed: ", err);
+    }
   }
 }
 

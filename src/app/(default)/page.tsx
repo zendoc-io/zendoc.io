@@ -99,7 +99,10 @@ export default function Home() {
         <BaseLink href="https://github.com/zendoc-io" newTab type="secondary">
           Zendoc on GitHub
         </BaseLink>
-        <div className="absolute -bottom-4 -right-20 -z-10 text-[#F1F1F1] md:-top-0 md:right-0">
+        <div
+          className="absolute -bottom-4 -right-20 -z-10 text-[#F1F1F1] md:-top-0 md:right-0"
+          id="stay-up-to-date"
+        >
           <GitHubIcon height={230} />
         </div>
       </section>
