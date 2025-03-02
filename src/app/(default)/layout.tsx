@@ -21,12 +21,10 @@ export default function DefaultLayout({
       description?: string;
     }[];
   }[] = [
-      { name: "Home", link: "/" },
-      { name: "Feature roadmap", link: "/feature-roadmap" },
-      { name: "Transparency", link: "/transparency" },
-      { name: "Imprint", link: "/imprint" },
-      { name: "Privacy", link: "/privacy" },
-    ];
+    { name: "Home", link: "/" },
+    { name: "Feature roadmap", link: "/feature-roadmap" },
+    { name: "Transparency", link: "/transparency" },
+  ];
 
   return (
     <div>
