@@ -1,0 +1,29 @@
+name: Deploy Docker Container
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, production]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and tag Docker image
+        run: |
+          docker build -t zendoc.io:latest .
+
+      - name: Stop existing container
+        run: |
+          docker stop zendoc.io || true
+          docker rm zendoc.io || true
+        continue-on-error: true
+
+      - name: Deploy container
+        run: |
+          docker run -d --name zendoc.io \
+            -p 4000:3000 \
+            --restart unless-stopped \
+            zendoc.io:latest
