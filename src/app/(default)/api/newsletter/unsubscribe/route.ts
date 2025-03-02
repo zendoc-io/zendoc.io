@@ -1,58 +1,82 @@
+import { NextResponse } from "next/server";
 import conn from "@/src/lib/db";
 import { cryptService } from "@/src/lib/crypt";
+import { checkEmailRegEx } from "@/src/lib/validation";
+
+interface UnsubscribeBody {
+  email: string;
+}
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const body = (await req.json()) as UnsubscribeBody;
     const { email } = body;
 
     if (!email) {
-      return new Response("Email is required", { status: 400 });
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    if (!checkEmailRegEx(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 },
+      );
     }
 
     const emailHash = cryptService.hash(email);
     if (!emailHash) {
-      return new Response("Failed to process email", { status: 500 });
+      return NextResponse.json(
+        { error: "Failed to process email" },
+        { status: 500 },
+      );
     }
 
     await conn?.query("BEGIN");
 
-    const subscriptionResponse = await conn?.query(
-      `SELECT id, verified FROM newsletter WHERE hash = $1 LIMIT 1`,
+    const deleteResult = await conn?.query(
+      `
+      WITH subscription AS (
+        SELECT id FROM newsletter 
+        WHERE hash = $1 AND verified = true
+        LIMIT 1
+      ),
+      verification_cleanup AS (
+        DELETE FROM verification 
+        WHERE newsletter_id IN (SELECT id FROM subscription)
+      )
+      DELETE FROM newsletter 
+      WHERE id IN (SELECT id FROM subscription)
+      RETURNING id
+    `,
       [emailHash],
     );
 
-    if (
-      !subscriptionResponse ||
-      subscriptionResponse.rows.length === 0 ||
-      !subscriptionResponse.rows[0].verified
-    ) {
+    if (!deleteResult?.rowCount) {
       await conn?.query("ROLLBACK");
-      return new Response("Subscription not found", { status: 404 });
-    }
-
-    const subscriptionId = subscriptionResponse.rows[0].id;
-
-    await conn?.query(`DELETE FROM verification WHERE newsletter_id = $1`, [
-      subscriptionId,
-    ]);
-
-    const deleteResult = await conn?.query(
-      `DELETE FROM newsletter WHERE id = $1 RETURNING id`,
-      [subscriptionId],
-    );
-
-    if (!deleteResult || deleteResult.rowCount === 0) {
-      await conn?.query("ROLLBACK");
-      return new Response("Failed to unsubscribe", { status: 500 });
+      return NextResponse.json(
+        { error: "Subscription not found" },
+        { status: 404 },
+      );
     }
 
     await conn?.query("COMMIT");
 
-    return new Response("Successfully unsubscribed", { status: 200 });
+    return NextResponse.json(
+      { message: "Successfully unsubscribed from newsletter" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error("Error processing unsubscribe request:", error);
-    await conn?.query("ROLLBACK");
-    return new Response("Failed to process request", { status: 500 });
+
+    try {
+      await conn?.query("ROLLBACK");
+    } catch (rollbackErr) {
+      console.error("Rollback error:", rollbackErr);
+    }
+
+    return NextResponse.json(
+      { error: "Failed to process request. Please try again later." },
+      { status: 500 },
+    );
   }
 }

@@ -246,7 +246,7 @@ export default function UnsubscribeNewsletter() {
               <BaseLink href="/" type="primary">
                 Return to Homepage
               </BaseLink>
-              <BaseLink href="/newsletter/signup" type="secondary">
+              <BaseLink href="/#stay-up-to-date" type="secondary">
                 Subscribe Again
               </BaseLink>
             </div>

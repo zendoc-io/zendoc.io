@@ -1,5 +1,4 @@
 import * as nodemailer from "nodemailer";
-import { cryptService } from "./crypt";
 
 interface EmailOptions {
   to: string;
@@ -15,7 +14,7 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT || "465"),
-      secure: process.env.SMTP_SECURE === "true",
+      secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
@@ -31,7 +30,7 @@ export class EmailService {
 
     try {
       await this.transporter.sendMail({
-        from: `"Zendoc" <${process.env.SMTP_FROM || "test@logiqit.de"}>`,
+        from: `"Zendoc" <${process.env.SMTP_FROM?.trim()}>`,
         to: options.to,
         subject: options.subject,
         html: options.html,
@@ -46,10 +45,10 @@ export class EmailService {
   async sendVerificationEmail(
     email: string,
     extensive: boolean,
+    token: string,
   ): Promise<void> {
     try {
-      const token = cryptService.createVerificationToken();
-      const verificationUrl = `https://zendoc.io/newsletter/verify?token=${token}}`;
+      const verificationUrl = `https://zendoc.io/api/newsletter/verify?token=${token}}`;
       const subscriptionType = extensive ? "comprehensive" : "release-only";
 
       const html = `
@@ -183,8 +182,9 @@ export class EmailService {
                           
                           <p style="margin: 0 0 15px; font-size: 16px; line-height: 24px;">Here's what you can expect to receive from us:</p>
                           
-                          ${extensive
-          ? `
+                          ${
+                            extensive
+                              ? `
                           <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
                             <tr>
                               <td style="padding: 10px; background-color: #FFF8F7; border-radius: 4px;">
@@ -226,7 +226,7 @@ export class EmailService {
                             </tr>
                           </table>
                           `
-          : `
+                              : `
                           <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px;">
                             <tr>
                               <td style="padding: 10px; background-color: #FFF8F7; border-radius: 4px;">
@@ -252,7 +252,7 @@ export class EmailService {
                             </tr>
                           </table>
                           `
-        }
+                          }
                           
                           <p style="margin: 0 0 20px; font-size: 16px; line-height: 24px;">Looking for more ways to get involved?</p>
                           
