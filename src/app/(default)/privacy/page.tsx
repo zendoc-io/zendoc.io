@@ -22,7 +22,7 @@ export default function PrivacyPolicy() {
 
   return (
     <div>
-      <div className="mx-auto max-w-4xl bg-white p-8 pb-12 pt-24 text-gray-800">
+      <div className="mx-auto max-w-4xl bg-white px-3 pb-3 pt-24 text-gray-800">
         <h1 className="mb-6 text-3xl font-bold">Privacy Policy</h1>
 
         <div className="mb-6">

@@ -24,7 +24,7 @@ export default function Imprint() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl bg-white p-8 pt-24 text-gray-800">
+    <div className="mx-auto max-w-4xl bg-white px-3 pb-3 pt-24 text-gray-800">
       <h1 className="mb-6 text-3xl font-bold">Imprint</h1>
 
       <div className="mb-6">

@@ -79,7 +79,7 @@ export default function DefaultLayout({
           </div>
           <div>
             <p className="mb-3 mt-5 text-sm">
-              © 2023 Zendoc. All rights reserved.
+              © {new Date().getFullYear()} Zendoc. All rights reserved.
             </p>
             <div className="flex items-center gap-3 text-sm">
               <FooterLink href="/imprint">Imprint</FooterLink>
